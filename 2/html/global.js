@@ -179,7 +179,7 @@ function toCaptureTime(page_id){
 		var nextSlideNo = currentSlideNo + 1 ;	
 	} 
 
-	if(nextSlideNo <= 2){ //Total slides present
+	if(nextSlideNo <= 1){ //Total slides present
 	// alert(nextSlideNo);
 	var tempNext = localStorage.getItem(currentContentId+"_"+contentName+"_slideNo_"+nextSlideNo);
 
@@ -232,44 +232,32 @@ else
 	//step 7 ends here
 	//localStorage.setItem(contentName+"_slideNo_"+currentSlideNo ,n);
 	var flag=0;
-	if(direction == 'b') {
+if(direction == 'b') {
 
-	//custom slide changes continues here....
+//custom slide changes continues here....
 
-	//alert("+++++bhitor reee +++++++"+custcomslideflag+"+++++++custcomslideid+++++++"+custcomslideid);
+		//alert("+++++bhitor reee +++++++"+custcomslideflag+"+++++++custcomslideid+++++++"+custcomslideid);
 	if (typeof(localStorage.getItem("currentcustomslideflag"))!='undefined' &&    localStorage.getItem("currentcustomslideflag") =='true'){
 		flag==0
 		localStorage.setItem("gotoNextPrevBrand" ,2);//if one than next if 2 than prev
 		window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
 
 
-	}
-	
-	//custom slide changes ends here....
+	}else{
+	if(page_id == 1){
+	localStorage.setItem("gotoNextPrevBrand" ,2);//if one than next if 2 than prev
+	window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
 
-	else{
-		if(page_id >= 0){
-			page_id = page_id - 1;
-		//alert(page_id);
-		//console.log(page_id);
-		if(page_id == 0){
-			flag=2;
-		}
-	}
-	if(flag == 2){
-        localStorage.setItem("gotoNextPrevBrand" ,2);//if one than next if 2 than prev
-        //flag == 0;
-        window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
-    }
-    else{
-    	localStorage.setItem("gotoNextPrevBrand" ,0);
-    }
+
+}else{
+	localStorage.setItem("gotoNextPrevBrand" ,0);//if one than next if 2 than prev
 }
 }
-
-else {
 	
-	//custom slide changes continues here....
+//custom slide changes ends here....
+}else {
+	
+//custom slide changes continues here....
 
 	if (typeof(localStorage.getItem("currentcustomslideflag"))!='undefined' && localStorage.getItem("currentcustomslideflag") =='true'){
 		flag==0
@@ -278,27 +266,19 @@ else {
 		window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
 	}
 	
-	//custom slide changes ends here....
+//custom slide changes ends here....
+else{
+	if(page_id == 1){
+	 localStorage.setItem("gotoNextPrevBrand" ,1);//if one than next if 2 than prev
+	 window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
+}else{
 
-	else {
-		if(page_id <= 2){
-			page_id = page_id + 1;
-		//alert(page_id);
-		if(page_id == 3){
-			flag=1;
-		}
+
+
+	localStorage.setItem("gotoNextPrevBrand" ,0);//if one than next if 2 than prev
+}
 	}
-	if(flag == 1){
-        localStorage.setItem("gotoNextPrevBrand" ,1);//if one than next if 2 than prev
-        flag == 0;
-        window.location = "js-call:" + "1" + ":" + encodeURIComponent(JSON.stringify({query:'NODATA', type:'brandNavigation', callback:'checkLastPgFn'}));
-    }
-    else{
-    	localStorage.setItem("gotoNextPrevBrand" ,0);
-    }
 }
-}
-
 //step 8:
 currentContentNSlide = currentContentId+"_"+contentName+"_"+page_id;
 //step 8 ends here
@@ -364,9 +344,6 @@ function set_pg_content(pg_id){
 	switch(pg_id){
 		case 1:
 		content='<link rel="stylesheet" type="text/css" href="slide1/slide1.css" media="screen"/><div class="background"><img src="slide1/1.jpg" width="1366" height="1024" alt=""/></div>';
-		break;
-		case 2:
-		content='<link rel="stylesheet" type="text/css" href="slide2/slide2.css" media="screen"/><div class="background"><img src="slide2/1.jpg" width="1366" height="1024" alt=""/></div>';
 		break;
 	}
 
